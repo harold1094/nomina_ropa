@@ -20,19 +20,21 @@
         </field>
     </record>
 
-    <!-- FORM VIEW NÓMINAS -->
+    <!-- FORM VIEW NÓMINAS (CORREGIDA PARA ODOO 18) -->
     <record id="view_nominas_ropa_nomina_form" model="ir.ui.view">
         <field name="name">nominas.ropa.nomina.form</field>
         <field name="model">nominas.ropa.nomina</field>
         <field name="arch" type="xml">
             <form string="Nómina">
                 <sheet>
+
+                    <!-- CABECERA -->
                     <div class="oe_title">
                         <field name="employee_id"/>
-                        <field name="state" widget="statusbar"
-                               statusbar_visible="draft,confirmed,paid"/>
+                        <field name="state" widget="statusbar"/>
                     </div>
 
+                    <!-- DATOS BÁSICOS -->
                     <group string="Datos básicos">
                         <field name="date"/>
                         <field name="base_salary"/>
@@ -41,12 +43,16 @@
                         <field name="gross_for_irpf" readonly="1"/>
                     </group>
 
+                    <!-- RESUMEN -->
                     <group string="Resumen">
                         <field name="total_bonuses" readonly="1"/>
                         <field name="total_deductions" readonly="1"/>
                     </group>
 
+                    <!-- PESTAÑAS -->
                     <notebook>
+
+                        <!-- BONIFICACIONES Y DEDUCCIONES -->
                         <page string="Bonificaciones y deducciones">
                             <field name="line_ids">
                                 <list editable="bottom">
@@ -57,30 +63,32 @@
                             </field>
                         </page>
 
+                        <!-- DOCUMENTO TRANSFERENCIA -->
                         <page string="Documento de transferencia">
                             <group>
                                 <field name="transfer_document" filename="transfer_filename"/>
-                                <field name="transfer_filename" readonly="1"/>
+                                <field name="transfer_filename"/>
                             </group>
                         </page>
+
                     </notebook>
 
+                    <!-- BOTONES SIN ATTRS (ODOO 18) -->
                     <footer>
                         <button name="action_set_draft"
                                 string="Borrador"
                                 type="object"
-                                class="btn-secondary"
-                                attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                class="btn-secondary"/>
+
                         <button name="action_confirm"
                                 string="Confirmar"
                                 type="object"
-                                class="btn-primary"
-                                attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                                class="btn-primary"/>
+
                         <button name="action_mark_paid"
                                 string="Marcar pagada"
                                 type="object"
-                                class="btn-success"
-                                attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
+                                class="btn-success"/>
                     </footer>
 
                 </sheet>
