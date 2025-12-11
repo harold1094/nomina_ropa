@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Menú raíz -->
+    <menuitem id="menu_nominas_ropa_root"
+              name="Nóminas tienda"
+              sequence="10"/>
+
+    <!-- Menú de nóminas -->
+    <menuitem id="menu_nominas_ropa_nominas"
+              name="Nóminas"
+              parent="menu_nominas_ropa_root"
+              action="action_nominas_ropa_nomina"
+              sequence="10"/>
+
+    <!-- Menú de declaraciones -->
+    <menuitem id="menu_nominas_ropa_rentas"
+              name="Declaraciones de la renta"
+              parent="menu_nominas_ropa_root"
+              action="action_nominas_ropa_renta"
+              sequence="20"/>
+
+</odoo>

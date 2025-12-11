@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_/var/lib/odoo/addons/18.0/nomina_ropa_/var/lib/odoo/addons/18.0/nomina_ropa,/var/lib/odoo/addons/18.0/nomina_ropa./var/lib/odoo/addons/18.0/nomina_ropa,model_/var/lib/odoo/addons/18.0/nomina_ropa_/var/lib/odoo/addons/18.0/nomina_ropa,base.group_user,1,1,1,1
+access_nominas_ropa_nomina,access_nominas_ropa_nomina,model_nominas_ropa_nomina,base.group_user,1,1,1,1
+access_nominas_ropa_linea,access_nominas_ropa_linea,model_nominas_ropa_linea,base.group_user,1,1,1,1
+access_nominas_ropa_renta,access_nominas_ropa_renta,model_nominas_ropa_renta,base.group_user,1,1,1,1

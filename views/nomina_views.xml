@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- LIST VIEW NÓMINAS -->
+    <record id="view_nominas_ropa_nomina_list" model="ir.ui.view">
+        <field name="name">nominas.ropa.nomina.list</field>
+        <field name="model">nominas.ropa.nomina</field>
+        <field name="arch" type="xml">
+            <list string="Nóminas">
+                <field name="employee_id"/>
+                <field name="date"/>
+                <field name="base_salary"/>
+                <field name="total_bonuses"/>
+                <field name="total_deductions"/>
+                <field name="gross_for_irpf"/>
+                <field name="irpf_percent"/>
+                <field name="irpf_amount"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM VIEW NÓMINAS -->
+    <record id="view_nominas_ropa_nomina_form" model="ir.ui.view">
+        <field name="name">nominas.ropa.nomina.form</field>
+        <field name="model">nominas.ropa.nomina</field>
+        <field name="arch" type="xml">
+            <form string="Nómina">
+                <sheet>
+                    <div class="oe_title">
+                        <field name="employee_id"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,confirmed,paid"/>
+                    </div>
+
+                    <group string="Datos básicos">
+                        <field name="date"/>
+                        <field name="base_salary"/>
+                        <field name="irpf_percent"/>
+                        <field name="irpf_amount" readonly="1"/>
+                        <field name="gross_for_irpf" readonly="1"/>
+                    </group>
+
+                    <group string="Resumen">
+                        <field name="total_bonuses" readonly="1"/>
+                        <field name="total_deductions" readonly="1"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Bonificaciones y deducciones">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="line_type"/>
+                                    <field name="concept"/>
+                                    <field name="amount"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Documento de transferencia">
+                            <group>
+                                <field name="transfer_document" filename="transfer_filename"/>
+                                <field name="transfer_filename" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+
+                    <footer>
+                        <button name="action_set_draft"
+                                string="Borrador"
+                                type="object"
+                                class="btn-secondary"
+                                attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                        <button name="action_confirm"
+                                string="Confirmar"
+                                type="object"
+                                class="btn-primary"
+                                attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        <button name="action_mark_paid"
+                                string="Marcar pagada"
+                                type="object"
+                                class="btn-success"
+                                attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
+                    </footer>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACTION NÓMINAS -->
+    <record id="action_nominas_ropa_nomina" model="ir.actions.act_window">
+        <field name="name">Nóminas</field>
+        <field name="res_model">nominas.ropa.nomina</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>
